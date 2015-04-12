@@ -12,7 +12,7 @@ public class Connection {
 	}
 	
 	public Connection(ArrayList<TransportLine> lines, Stop start, Stop end) {
-		lines = new ArrayList<TransportLine>(lines);
+		this.lines = new ArrayList<TransportLine>(lines);
 		this.startingStop = start;
 		this.endingStop = end;
 	}

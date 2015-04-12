@@ -19,4 +19,9 @@ public class TransportLine {
 	public void setType(TransportType type) {
 		this.type = type;
 	}
+	
+	@Override
+	public String toString() {
+		return type.toString() + " " + number;
+	}
 }
