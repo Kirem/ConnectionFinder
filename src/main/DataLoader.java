@@ -9,30 +9,45 @@ import java.util.ArrayList;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import objects.Connection;
+import objects.Stop;
 import objects.TransportLine;
 
 public class DataLoader {
-	private StringBuilder json;
 	private ArrayList<TransportLine> lines;
-	private Type type;
+	private ArrayList<Connection> connections;
+	private ArrayList<Stop> stops;
+	private Type typeLine, typeConnection, typeStop;
 	
 	public DataLoader(){
-		json = new StringBuilder();
 		lines = new ArrayList<TransportLine>();
-		type = new TypeToken<ArrayList<TransportLine>>(){}.getType();
+		typeLine = new TypeToken<ArrayList<TransportLine>>(){}.getType();
+		typeConnection = new TypeToken<ArrayList<Connection>>(){}.getType();
+		typeStop = new TypeToken<ArrayList<Stop>>(){}.getType();
 	}
 	
 	public ArrayList<TransportLine> loadLines(String filePath) throws IOException{
-//		json.delete(0, json.length()-1);	//nie ma czegos w stylu deleteAll albo clear kurde? tu mi sie sypie -.-
-		loadDataToString(filePath);
-		String linesString = json.toString();
-		lines = new Gson().fromJson(linesString, type);
+		String linesString = loadDataToString(filePath);
+		lines = new Gson().fromJson(linesString, typeLine);
 		return lines;
 	}
 	
-	private void loadDataToString(String filePath) throws IOException{
+	public ArrayList<Connection> loadConnections(String filePath) throws IOException{
+		String connectionsString = loadDataToString(filePath);
+		connections = new Gson().fromJson(connectionsString, typeConnection);
+		return connections;
+	}
+	
+	public ArrayList<Stop> loadStops(String filePath) throws IOException{
+		String stopsString = loadDataToString(filePath);
+		stops = new Gson().fromJson(stopsString, typeStop);
+		return stops;
+	}
+	
+	private String loadDataToString(String filePath) throws IOException{
 		FileReader fileReader = new FileReader(filePath);
 		BufferedReader bufferedReader = new BufferedReader(fileReader);
+		StringBuilder json = new StringBuilder();
 		
 		String textLine = bufferedReader.readLine();
 		  do {
@@ -42,5 +57,6 @@ public class DataLoader {
 		  } while(textLine != null);
 
 		  bufferedReader.close();
+		  return json.toString();
 	}
 }

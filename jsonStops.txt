@@ -1,1 +1,1 @@
-{"stopID":1234,"stopName":"sample"}
+[{"stopID":1234,"stopName":"sample"},{"stopID":12345,"stopName":"sample1"}]

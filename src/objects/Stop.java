@@ -33,4 +33,8 @@ public class Stop {
 		this.stopName = stopName;
 	}
 	
+	public String toString(){
+		return "ID: " + stopID + " Name: " + stopName; 
+	}
+	
 }

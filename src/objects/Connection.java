@@ -50,4 +50,8 @@ public class Connection {
 	public void setLinesArray(ArrayList<TransportLine> lines) {
 		this.lines = lines;
 	}
+	
+	public String toString(){
+		return "Start: " + startingStop.toString() + "\nStop: " + endingStop.toString();
+	}
 }
