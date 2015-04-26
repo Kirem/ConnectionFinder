@@ -14,8 +14,12 @@ public class Stop {
 	public boolean equals(Object obj) {
 		return stopID == ((Stop)obj).stopID;
 	}
-
-
+	
+	@Override
+	public String toString() {
+		System.out.println("Stop: " + stopName + ", Id: " + stopID);
+		return super.toString();
+	}
 
 	public int getStopID() {
 		return stopID;

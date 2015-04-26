@@ -1,1 +1,12 @@
-{"lines":[{"type":"Bus","number":112},{"type":"Bus","number":112},{"type":"Bus","number":112},{"type":"Bus","number":112},{"type":"Bus","number":112}],"startingStop":{"stopID":1234,"stopName":"sample"},"endingStop":{"stopID":12345,"stopName":"sample1"}}
+{"lines":[
+	{"type":"Bus","number":112},
+	{"type":"Bus","number":112},
+	{"type":"Bus","number":112},
+	{"type":"Bus","number":112},
+	{"type":"Bus","number":112}
+		],
+	"startingStop":
+		{"stopID":1234,"stopName":"sample"},
+	"endingStop":
+		{"stopID":12345,"stopName":"sample1"}
+}
