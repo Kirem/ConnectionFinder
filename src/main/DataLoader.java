@@ -11,19 +11,22 @@ import com.google.gson.reflect.TypeToken;
 
 import objects.Connection;
 import objects.Stop;
+import objects.Timetable;
 import objects.TransportLine;
 
 public class DataLoader {
 	private ArrayList<TransportLine> lines;
 	private ArrayList<Connection> connections;
 	private ArrayList<Stop> stops;
-	private Type typeLine, typeConnection, typeStop;
+	private ArrayList<Timetable> timetable;
+	private Type typeLine, typeConnection, typeStop, typeTimetable;
 	
 	public DataLoader(){
 		lines = new ArrayList<TransportLine>();
 		typeLine = new TypeToken<ArrayList<TransportLine>>(){}.getType();
 		typeConnection = new TypeToken<ArrayList<Connection>>(){}.getType();
 		typeStop = new TypeToken<ArrayList<Stop>>(){}.getType();
+		typeTimetable = new TypeToken<ArrayList<Timetable>>(){}.getType();
 	}
 	
 	public ArrayList<TransportLine> loadLines(String filePath) throws IOException{
@@ -42,6 +45,12 @@ public class DataLoader {
 		String stopsString = loadDataToString(filePath);
 		stops = new Gson().fromJson(stopsString, typeStop);
 		return stops;
+	}
+	
+	public ArrayList<Timetable> loadTimetable(String filePath) throws IOException{
+		String timeTableString = loadDataToString(filePath);
+		timetable = new Gson().fromJson(timeTableString, typeTimetable);
+		return timetable;
 	}
 	
 	private String loadDataToString(String filePath) throws IOException{
