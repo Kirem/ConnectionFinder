@@ -3,7 +3,7 @@ package objects;
 import java.util.ArrayList;
 
 public class Timetable {
-	private int stopID;
+	private int stopId;
 	private int lineNumber;
 	private ArrayList<Integer> normalDeparture;
 	private ArrayList<Integer> weekendDeparture;
@@ -12,21 +12,29 @@ public class Timetable {
 		normalDeparture = new ArrayList<Integer>();
 		weekendDeparture = new ArrayList<Integer>();
 	}
+	
+
+	public Timetable(int id, int lineNum) {
+		this.stopId = id;
+		this.lineNumber = lineNum;
+		normalDeparture = new ArrayList<Integer>();
+		weekendDeparture = new ArrayList<Integer>();
+	}
 
 	public Timetable(int id, int lineNum, ArrayList<Integer> normalDep,
 			ArrayList<Integer> weekendDep) {
-		this.stopID = id;
+		this.stopId = id;
 		this.lineNumber = lineNum;
 		this.normalDeparture = new ArrayList<Integer>(normalDep);
 		this.weekendDeparture = new ArrayList<Integer>(weekendDep);
 	}
 
 	public void setStopID(int id) {
-		this.stopID = id;
+		this.stopId = id;
 	}
 
 	public int getStopID() {
-		return stopID;
+		return stopId;
 	}
 
 	public void setLineNumber(int lineNumber) {
@@ -95,8 +103,15 @@ public class Timetable {
 		for (int time : weekendDeparture) {
 			weekend.append(time + " , ");
 		}
-		return "Stop ID: " + stopID + " Line nr: " + lineNumber
+		return "Stop ID: " + stopId + " Line nr: " + lineNumber
 				+ "\nNormal Departure: " + normal.toString()
 				+ "\nWeekend Departure: " + weekend.toString();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Timetable table = (Timetable) obj;
+		return this.lineNumber == table.lineNumber 
+				&& this.stopId == table.stopId;
 	}
 }

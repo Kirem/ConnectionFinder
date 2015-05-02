@@ -6,12 +6,14 @@ public class Connection {
 	private ArrayList<TransportLine> lines;
 	private Stop startingStop;
 	private Stop endingStop;
+	private int timeOfTravel;
+	private int id;
 	
 	public Connection() {
 		lines = new ArrayList<TransportLine>();
 	}
 	
-	public Connection(ArrayList<TransportLine> lines, Stop start, Stop end) {
+	public Connection(ArrayList<TransportLine> lines, Stop start, Stop end, int dist, int id) {
 		this.lines = new ArrayList<TransportLine>(lines);
 		this.startingStop = start;
 		this.endingStop = end;
@@ -53,5 +55,17 @@ public class Connection {
 	
 	public String toString(){
 		return "Start: " + startingStop.toString() + "\nStop: " + endingStop.toString();
+	}
+
+	public int getTimeOfTravel() {
+		return timeOfTravel;
+	}
+
+	public void setTimeOfTravel(int timeOfTravel) {
+		this.timeOfTravel = timeOfTravel;
+	}
+
+	public int getConnectionID() {
+		return id;
 	}
 }

@@ -1,20 +1,26 @@
 [
 	{
 		"stopId":1,
-		"lineNumber":1,
-		"normalDeparture":[5,5,5],
-		"weekendDeparture":[5,5,5]
+		"lineNumber":112,
+		"normalDeparture":[50, 100, 150, 200, 250, 300],
+		"weekendDeparture":[50, 100, 150, 200, 250, 300]
 	},
 	{
 		"stopId":1,
-		"lineNumber":1,
-		"normalDeparture":[5,5,5],
-		"weekendDeparture":[5,5,5]
+		"lineNumber":113,
+		"normalDeparture":[60, 110, 160, 210, 260, 310],
+		"weekendDeparture":[60, 110, 160, 210, 260, 310]
 	},
 	{
-		"stopId":1,
-		"lineNumber":1,
-		"normalDeparture":[5,5,5],
-		"weekendDeparture":[5,5,5]
+		"stopId":2,
+		"lineNumber":112,
+		"normalDeparture":[60, 110, 160, 210, 260, 310],
+		"weekendDeparture":[60, 110, 160, 210, 260, 310]
+	},
+	{
+		"stopId":2,
+		"lineNumber":113,
+		"normalDeparture":[70, 120, 170, 220, 270, 320],
+		"weekendDeparture":[70, 120, 170, 220, 270, 320]
 	}
 ]
