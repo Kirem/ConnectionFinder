@@ -1,6 +1,5 @@
 package main;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,9 +11,13 @@ import objects.Stop;
 import objects.Timetable;
 import objects.TransportLine;
 import objects.TransportType;
+import objects.Week;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import dijkstra.Dijkstra;
+import dijkstra.Graph;
 
 public class ConnectionFinder {
 
@@ -50,6 +53,18 @@ public class ConnectionFinder {
 		for(Timetable table: timetable){
 			System.out.println(table.toString());
 		}
+		
+		new GraphBuilder();
+		Graph graph = GraphBuilder.build(connections, timetable);
+		System.out.println("Graph structure:");
+		System.out.println(graph);
+		System.out.println();
+		System.out.println("Algorith result:");
+		System.out.println(new Dijkstra(graph, 50, Week.MONDAY).findShortestPath(1, 3));
+
+
+		
+
 	}
 
 }

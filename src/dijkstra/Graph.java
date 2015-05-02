@@ -14,8 +14,8 @@ public class Graph {
 		edges = new ArrayList<>();
 	}
 
-	public void addEdge(Vertex vertex1, Vertex vertex2, double dist, int edgeId, Timetable tt)
-			throws IllegalArgumentException {
+	public void addEdge(Vertex vertex1, Vertex vertex2, double dist,
+			int edgeId, Timetable tt) throws IllegalArgumentException {
 
 		if (!(vertexes.contains(vertex1) && vertexes.contains(vertex2))) {
 			throw new IllegalArgumentException(
@@ -43,7 +43,8 @@ public class Graph {
 	}
 
 	public void addVertex(Vertex vertexId) {
-		vertexes.add(vertexId);
+		if (!vertexes.contains(vertexId))
+			vertexes.add(vertexId);
 	}
 
 	public int getNumberOfVertexes() {
@@ -54,8 +55,10 @@ public class Graph {
 		return vertexes;
 	}
 
-	public double getEdgeDistance(int vertex1, int vertex2, int currTime, Week weekDay) {
-		Edge tempEdge = new Edge(vertexes.get(vertex1), vertexes.get(vertex2), 0, 0, null);
+	public double getEdgeDistance(int vertex1, int vertex2, int currTime,
+			Week weekDay) {
+		Edge tempEdge = new Edge(vertexes.get(vertex1), vertexes.get(vertex2),
+				0, 0, null);
 		for (Edge edge : edges) {
 			if (edge.equals(tempEdge)) {
 				return edge.getDistance(currTime, weekDay);
@@ -63,7 +66,7 @@ public class Graph {
 		}
 		return -1;
 	}
-	
+
 	public double getEdgeDistance(int id) {
 
 		for (Edge edge : edges) {

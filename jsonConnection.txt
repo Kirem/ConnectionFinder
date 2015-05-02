@@ -1,1 +1,20 @@
-[{"lines":[{"type":"Bus","number":112},{"type":"Bus","number":112},{"type":"Bus","number":112},{"type":"Bus","number":112},{"type":"Bus","number":112}],"startingStop":{"stopID":1234,"stopName":"sample"},"endingStop":{"stopID":12345,"stopName":"sample1"}}]
+[
+	{
+		"lines":[
+			{"type":"Bus","number":113},
+			{"type":"Bus","number":112}
+			],
+		"timeOfTravel":10,
+		"startingStop":{"stopID":1,"stopName":"sample"},
+		"endingStop":{"stopID":2,"stopName":"sample1"}
+	},
+		
+	{
+		"lines":[
+			{"type":"Bus","number":113}
+			],
+		"timeOfTravel":5,
+		"startingStop":{"stopID":2,"stopName":"sample1"},
+		"endingStop":{"stopID":3,"stopName":"sample2"}
+	}
+]
