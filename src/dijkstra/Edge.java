@@ -1,11 +1,16 @@
 package dijkstra;
 
+import objects.Timetable;
+import objects.Week;
+
 public class Edge {
 	private Vertex vertex1, vertex2;
-    private double distance, edgeMultiplier;
+    private double distance;//time to travel between two stops
+    private double edgeMultiplier;
     private int edgeId;
+    private Timetable timetable;//time, when the bus arrive
 
-    public Edge(Vertex v1, Vertex v2, int edgeId, double dis) {
+    public Edge(Vertex v1, Vertex v2, int edgeId, double dis, Timetable tt) {
         this.vertex1 = v1;
         this.vertex2 = v2;
         this.distance = dis;
@@ -42,5 +47,9 @@ public class Edge {
 
 	public int getId() {
 		return edgeId;
+	}
+
+	public double getDistance(int currTime, Week day) {
+		return timetable.getFirstTimeAfter(currTime, day) + distance;
 	}
 }

@@ -2,6 +2,9 @@ package dijkstra;
 
 import java.util.ArrayList;
 
+import objects.Timetable;
+import objects.Week;
+
 public class Graph {
 	private ArrayList<Vertex> vertexes;
 	private ArrayList<Edge> edges;
@@ -11,7 +14,7 @@ public class Graph {
 		edges = new ArrayList<>();
 	}
 
-	public void addEdge(Vertex vertex1, Vertex vertex2, double dist, int edgeId)
+	public void addEdge(Vertex vertex1, Vertex vertex2, double dist, int edgeId, Timetable tt)
 			throws IllegalArgumentException {
 
 		if (!(vertexes.contains(vertex1) && vertexes.contains(vertex2))) {
@@ -19,7 +22,7 @@ public class Graph {
 					"List vertexes doesn't contain at least one vertex");
 		}
 
-		Edge edge = new Edge(vertex1, vertex2, edgeId, dist);
+		Edge edge = new Edge(vertex1, vertex2, edgeId, dist, tt);
 		edges.add(edge);
 		vertex1.addNeighbour(vertex2);
 		vertex2.addNeighbour(vertex1);
@@ -51,11 +54,11 @@ public class Graph {
 		return vertexes;
 	}
 
-	public double getEdgeDistance(int vertex1, int vertex2) {
-		Edge tempEdge = new Edge(vertexes.get(vertex1), vertexes.get(vertex2), 0, 0);
+	public double getEdgeDistance(int vertex1, int vertex2, int currTime, Week weekDay) {
+		Edge tempEdge = new Edge(vertexes.get(vertex1), vertexes.get(vertex2), 0, 0, null);
 		for (Edge edge : edges) {
 			if (edge.equals(tempEdge)) {
-				return edge.getDistance();
+				return edge.getDistance(currTime, weekDay);
 			}
 		}
 		return -1;
