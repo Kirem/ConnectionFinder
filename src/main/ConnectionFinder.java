@@ -60,7 +60,7 @@ public class ConnectionFinder {
 		System.out.println(graph);
 		System.out.println();
 		System.out.println("Algorith result:");
-		System.out.println(new Dijkstra(graph, 50, Week.MONDAY).findShortestPath(1, 3));
+		System.out.println(new Dijkstra(graph, 50, Week.MONDAY).findShortestPath(112, 339));
 
 
 		

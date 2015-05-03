@@ -1,6 +1,7 @@
 package dijkstra;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import objects.Timetable;
 import objects.Week;
@@ -21,11 +22,13 @@ public class Graph {
 			throw new IllegalArgumentException(
 					"List vertexes doesn't contain at least one vertex");
 		}
+		vertex1 = vertexes.get(vertexes.indexOf(vertex1));
+		vertex2 = vertexes.get(vertexes.indexOf(vertex2));
 
 		Edge edge = new Edge(vertex1, vertex2, edgeId, dist, tt);
 		edges.add(edge);
 		vertex1.addNeighbour(vertex2);
-		vertex2.addNeighbour(vertex1);
+//		vertex2.addNeighbour(vertex1);
 	}
 
 	public void setEdgeMultiplier(int edgeId, double multiplier) {
@@ -54,10 +57,18 @@ public class Graph {
 	public ArrayList<Vertex> getVertexes() {
 		return vertexes;
 	}
+	
+	public List<Integer> getNeighboursForVertex(int vertexId){
+		Vertex tem = new Vertex(vertexId);
+		return vertexes.get(vertexes.indexOf(tem)).getNeighbours();
+	}
 
 	public double getEdgeDistance(int vertex1, int vertex2, int currTime,
 			Week weekDay) {
-		Edge tempEdge = new Edge(vertexes.get(vertex1), vertexes.get(vertex2),
+		Vertex v1 = new Vertex(vertex1);
+		Vertex v2 = new Vertex(vertex2);
+		
+		Edge tempEdge = new Edge(vertexes.get(vertexes.indexOf(v1)), vertexes.get(vertexes.indexOf(v2)),
 				0, 0, null);
 		for (Edge edge : edges) {
 			if (edge.equals(tempEdge)) {

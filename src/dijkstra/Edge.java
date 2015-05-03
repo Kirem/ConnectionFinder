@@ -15,6 +15,7 @@ public class Edge {
         this.vertex2 = v2;
         this.distance = dis;
         this.edgeMultiplier = 1;
+        this.timetable=tt;
     }
 
     public double getDistance() {
@@ -36,7 +37,6 @@ public class Edge {
     @Override
     public boolean equals(Object o) {
         if (o instanceof Edge) {
-        	//TODO return edgeId==edgeId?
             return ((this.vertex1.equals(((Edge) o).vertex1)
                     && this.vertex2.equals(((Edge) o).vertex2))
                     || (this.vertex1.equals (((Edge) o).vertex2)
@@ -50,6 +50,6 @@ public class Edge {
 	}
 
 	public double getDistance(int currTime, Week day) {
-		return timetable.getFirstTimeAfter(currTime, day) + distance;
+		return timetable.getFirstTimeAfter(currTime, day) - currTime + distance;
 	}
 }

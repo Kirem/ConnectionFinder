@@ -114,11 +114,5 @@ public class Timetable {
 		return this.lineNumber == table.lineNumber 
 				&& this.stopId == table.stopId;
 	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		Timetable table = (Timetable) obj;
-		return this.lineNumber == table.lineNumber 
-				&& this.stopId == table.stopId;
-	}
+
 }
