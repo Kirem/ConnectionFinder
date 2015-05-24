@@ -93,6 +93,38 @@ public class Timetable {
 			return normalDeparture.get(0);
 		}
 	}
+	public int getFirstTimeBefore(int minutes, Week whatDay) {
+		switch (whatDay) {
+		case FRIDAY:
+			for (int i = normalDeparture.size()-1; i > 0; i--) {
+				if (normalDeparture.get(i) <= minutes) {
+					return normalDeparture.get(i);
+				}
+			}
+//			return weekendDeparture.get(0);
+		case SATURDAY:
+			for (int i = weekendDeparture.size()-1; i > 0; i--) {
+				if (weekendDeparture.get(i) <= minutes) {
+					return weekendDeparture.get(i);
+				}
+			}
+			return weekendDeparture.get(0);
+		case SUNDAY:
+			for (int i = weekendDeparture.size()-1; i > 0; i--) {
+				if (weekendDeparture.get(i) <= minutes) {
+					return weekendDeparture.get(i);
+				}
+			}
+			return normalDeparture.get(0);
+		default:
+			for (int i = normalDeparture.size()-1; i > 0; i--) {
+				if (normalDeparture.get(i) <= minutes) {
+					return normalDeparture.get(i);
+				}
+			}
+			return normalDeparture.get(0);
+		}
+	}
 
 	public String toString() {
 		StringBuilder normal = new StringBuilder();

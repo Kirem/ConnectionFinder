@@ -30,6 +30,21 @@ public class Graph {
 		vertex1.addNeighbour(vertex2);
 //		vertex2.addNeighbour(vertex1);
 	}
+	public void addReverseEdge(Vertex vertex1, Vertex vertex2, double dist,
+			int edgeId, Timetable tt) throws IllegalArgumentException {
+
+		if (!(vertexes.contains(vertex1) && vertexes.contains(vertex2))) {
+			throw new IllegalArgumentException(
+					"List vertexes doesn't contain at least one vertex");
+		}
+		vertex1 = vertexes.get(vertexes.indexOf(vertex1));
+		vertex2 = vertexes.get(vertexes.indexOf(vertex2));
+
+		Edge edge = new ReverseEdge(vertex1, vertex2, edgeId, dist, tt);
+		edges.add(edge);
+		vertex1.addNeighbour(vertex2);
+//		vertex2.addNeighbour(vertex1);
+	}
 
 	public void setEdgeMultiplier(int edgeId, double multiplier) {
 		for (Edge e : edges) {
@@ -60,6 +75,9 @@ public class Graph {
 	
 	public List<Integer> getNeighboursForVertex(int vertexId){
 		Vertex tem = new Vertex(vertexId);
+		if(vertexes.indexOf(tem) == -1){
+			return new ArrayList<>();
+		}
 		return vertexes.get(vertexes.indexOf(tem)).getNeighbours();
 	}
 

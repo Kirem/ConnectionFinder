@@ -5,10 +5,10 @@ import objects.Week;
 
 public class Edge {
 	private Vertex vertex1, vertex2;
-    private double distance;//time to travel between two stops
+    protected double distance;//time to travel between two stops
     private double edgeMultiplier;
     private int edgeId;
-    private Timetable timetable;//time, when the bus arrive
+    protected Timetable timetable;//time, when the bus arrive
 
     public Edge(Vertex v1, Vertex v2, int edgeId, double dis, Timetable tt) {
         this.vertex1 = v1;
@@ -50,6 +50,7 @@ public class Edge {
 	}
 
 	public double getDistance(int currTime, Week day) {
+		System.out.println("normal edge");
 		return timetable.getFirstTimeAfter(currTime, day) - currTime + distance;
 	}
 }

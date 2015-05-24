@@ -55,16 +55,12 @@ public class ConnectionFinder {
 		}
 		
 		new GraphBuilder();
-		Graph graph = GraphBuilder.build(connections, timetable);
+		Graph graph = GraphBuilder.buildReverse(connections, timetable);
 		System.out.println("Graph structure:");
 		System.out.println(graph);
 		System.out.println();
 		System.out.println("Algorith result:");
-		System.out.println(new Dijkstra(graph, 50, Week.MONDAY).findShortestPath(112, 339));
-
-
-		
-
+		System.out.println(new Dijkstra(graph, 315, Week.MONDAY).findShortestPath(339, 112, true));
 	}
 
 }
