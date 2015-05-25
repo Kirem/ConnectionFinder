@@ -105,6 +105,21 @@ public class Graph {
 		}
 		return -1;
 	}
+	
+	public int getLineNumber(int vertex1, int vertex2, int currTime,
+			Week weekDay){
+		Vertex v1 = new Vertex(vertex1);
+		Vertex v2 = new Vertex(vertex2);
+		
+		Edge tempEdge = new Edge(vertexes.get(vertexes.indexOf(v1)), vertexes.get(vertexes.indexOf(v2)),
+				0, 0, null);
+		for (Edge edge : edges) {
+			if (edge.equals(tempEdge)) {
+				return edge.timetable.getLineNumber();
+			}
+		}
+		return -1;
+	}
 
 	public Vertex getVertex(int which) {
 		return vertexes.get(which);

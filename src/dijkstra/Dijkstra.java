@@ -13,26 +13,28 @@ public class Dijkstra {
 	private Map<Integer, Integer> precursor;
 	private Map<Integer, Double> path;
 	private List<Integer> result;
+	private Map<Integer, Integer> changedLine;
 	private Graph graph;
 	private int justAdded, goal;
 	private int startingTime;
 	private Week weekDay;
 	DijkstraResult dijkstraResult;
 	private int start;
-	private int time;
+	private int time, lastLineNum, lineCounter;
 
 	public Dijkstra(Graph g, int startingTime, Week day) {
 		setGraph(g);
 		precursor = new HashMap<>();
 		path = new HashMap<>();
 		pending = new HashMap<Integer, Integer>();
+		changedLine = new HashMap<>();
 		result = new ArrayList<>();
 		this.startingTime = startingTime;
 		this.weekDay = day;
 		dijkstraResult = new DijkstraResult();
 	}
 
-	public DijkstraResult findShortestPath(int start, int end, boolean reversed) {
+	public DijkstraResult findShortestPath(int start, int end, boolean reversed, boolean notChangeLine) {
 		clearIfExist();
 		setLists();
 		setTarget(start, end);
@@ -52,11 +54,26 @@ public class Dijkstra {
 					double newPath = path.get(justAdded)
 							+ graph.getEdgeDistance(justAdded, neighbour,
 									currTime, weekDay);
+					int currLineNum = graph.getLineNumber(justAdded, neighbour, currTime, weekDay);
 					System.out.println("currtime: " + currTime + " new Path: "
-							+ newPath);
+							+ newPath + " currLine: " + currLineNum);
+					
+					if (notChangeLine) {
+						if (lastLineNum == currLineNum) {
+							setShorterPath(neighbour, newPath);
+							if (neighbour == goal) {
+								time = currTime;
+							}
+							break;
+						}
+					}
 					if (path.get(neighbour) > newPath) {
 						setShorterPath(neighbour, newPath);
-						if(neighbour == goal){
+						if (lastLineNum != currLineNum) {
+							changedLine.put(neighbour, 1);
+							lastLineNum = currLineNum;
+						}
+						if (neighbour == goal) {
 							time = currTime;
 						}
 					}
@@ -67,6 +84,7 @@ public class Dijkstra {
 		createSolution();
 		dijkstraResult.path = result;
 		dijkstraResult.time = time;
+		dijkstraResult.interchangeNumber = lineCounter;
 		return dijkstraResult;
 	}
 
@@ -79,6 +97,8 @@ public class Dijkstra {
 		path.clear();
 		precursor.clear();
 		result.clear();
+		changedLine.clear();
+		lineCounter = 0;
 	}
 
 	private void setLists() {
@@ -86,6 +106,7 @@ public class Dijkstra {
 			precursor.put(graph.getVertex(i).getId(), -1);
 			pending.put(graph.getVertex(i).getId(), i);
 			path.put(graph.getVertex(i).getId(), Double.MAX_VALUE);
+			changedLine.put(graph.getVertex(i).getId(), 0);
 		}
 	}
 
@@ -128,6 +149,9 @@ public class Dijkstra {
 		result.add(goal);
 		while (precursor.get(previous) != -1) {
 			result.add(precursor.get(previous));
+			if (changedLine.get(previous) != 0) {
+				lineCounter++;
+			}
 			previous = precursor.get(previous);
 		}
 	}
