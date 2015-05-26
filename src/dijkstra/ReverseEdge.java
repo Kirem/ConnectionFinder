@@ -6,8 +6,8 @@ import objects.Week;
 public class ReverseEdge extends Edge {
 
 	public ReverseEdge(Vertex v1, Vertex v2, int edgeId, double dis,
-			Timetable tt) {
-		super(v1, v2, edgeId, dis, tt);
+			Timetable tt, boolean sameEdge) {
+		super(v1, v2, edgeId, dis, tt, sameEdge);
 	}
 
 	@Override

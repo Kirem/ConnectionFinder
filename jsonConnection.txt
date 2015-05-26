@@ -1,17 +1,34 @@
 [
 	{
 		"lines":[
-			{"type":"Bus","number":113},
-			{"type":"Bus","number":112}
+			{"type":"Bus","number":113}
 			],
-		"timeOfTravel":10,
+		"timeOfTravel":5,
 		"startingStop":{"stopID":1,"stopName":"sample"},
 		"endingStop":{"stopID":2,"stopName":"sample1"}
+	},	
+	{
+		"lines":[
+			{"type":"Bus","number":112}
+			],
+		"timeOfTravel":50,
+		"startingStop":{"stopID":1,"stopName":"sample"},
+		"endingStop":{"stopID":2,"stopName":"sample1"}
+	},	
+	{
+		"lines":[
+			{"type":"Bus","number":112},
+			{"type":"Bus","number":113}
+			],
+		"timeOfTravel":0,
+		"startingStop":{"stopID":1,"stopName":"sample"},
+		"endingStop":{"stopID":1,"stopName":"sample"}
 	},
 		
 	{
 		"lines":[
-			{"type":"Bus","number":113}
+			{"type":"Bus","number":113},
+			{"type":"Bus","number":112}
 			],
 		"timeOfTravel":5,
 		"startingStop":{"stopID":2,"stopName":"sample1"},

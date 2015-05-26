@@ -31,10 +31,10 @@ public class GraphBuilder {
 				graph.addVertex(vert);
 				graph.addVertex(vert2);
 				graph.addEdge(vert, vert2, connection.getTimeOfTravel(), pos,
-						table);
+						table, false);
 				for (TransportLine line1 : connection.getLinesArray()) {
 					if (line != line1) {
-						table = new Timetable(connection.getEndingStop()
+						table = new Timetable(connection.getStartingStop()
 								.getStopID(), line1.getNumber());
 						pos = times.indexOf(table);
 						table = times.get(pos);
@@ -43,7 +43,7 @@ public class GraphBuilder {
 						graph.addVertex(vert2);
 						System.out.println(line);
 						System.out.println(line1);
-						graph.addEdge(vert, vert2, 0, pos, table);
+						graph.addEdge(vert, vert2, 0, pos, table, true);
 					}
 				}
 			}
@@ -74,7 +74,7 @@ public class GraphBuilder {
 				graph.addVertex(vert);
 				graph.addVertex(vert2);
 				graph.addReverseEdge(vert, vert2, connection.getTimeOfTravel(),
-						pos, table);
+						pos, table, false);
 				for (TransportLine line1 : connection.getLinesArray()) {
 					if (line != line1) {
 						table = new Timetable(connection.getStartingStop()
@@ -86,7 +86,7 @@ public class GraphBuilder {
 						graph.addVertex(vert);
 						System.out.println(line);
 						System.out.println(line1);
-						graph.addReverseEdge(vert, vert2, 0, pos, table);
+						graph.addReverseEdge(vert, vert2, 0, pos, table, true);
 					}
 				}
 			}

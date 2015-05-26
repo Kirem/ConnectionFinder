@@ -16,7 +16,7 @@ public class Graph {
 	}
 
 	public void addEdge(Vertex vertex1, Vertex vertex2, double dist,
-			int edgeId, Timetable tt) throws IllegalArgumentException {
+			int edgeId, Timetable tt, boolean se) throws IllegalArgumentException {
 
 		if (!(vertexes.contains(vertex1) && vertexes.contains(vertex2))) {
 			throw new IllegalArgumentException(
@@ -25,13 +25,13 @@ public class Graph {
 		vertex1 = vertexes.get(vertexes.indexOf(vertex1));
 		vertex2 = vertexes.get(vertexes.indexOf(vertex2));
 
-		Edge edge = new Edge(vertex1, vertex2, edgeId, dist, tt);
+		Edge edge = new Edge(vertex1, vertex2, edgeId, dist, tt, se);
 		edges.add(edge);
 		vertex1.addNeighbour(vertex2);
 //		vertex2.addNeighbour(vertex1);
 	}
 	public void addReverseEdge(Vertex vertex1, Vertex vertex2, double dist,
-			int edgeId, Timetable tt) throws IllegalArgumentException {
+			int edgeId, Timetable tt, boolean sameEdge) throws IllegalArgumentException {
 
 		if (!(vertexes.contains(vertex1) && vertexes.contains(vertex2))) {
 			throw new IllegalArgumentException(
@@ -40,7 +40,7 @@ public class Graph {
 		vertex1 = vertexes.get(vertexes.indexOf(vertex1));
 		vertex2 = vertexes.get(vertexes.indexOf(vertex2));
 
-		Edge edge = new ReverseEdge(vertex1, vertex2, edgeId, dist, tt);
+		Edge edge = new ReverseEdge(vertex1, vertex2, edgeId, dist, tt, sameEdge);
 		edges.add(edge);
 		vertex1.addNeighbour(vertex2);
 //		vertex2.addNeighbour(vertex1);
@@ -87,7 +87,7 @@ public class Graph {
 		Vertex v2 = new Vertex(vertex2);
 		
 		Edge tempEdge = new Edge(vertexes.get(vertexes.indexOf(v1)), vertexes.get(vertexes.indexOf(v2)),
-				0, 0, null);
+				0, 0, null, false);
 		for (Edge edge : edges) {
 			if (edge.equals(tempEdge)) {
 				return edge.getDistance(currTime, weekDay);

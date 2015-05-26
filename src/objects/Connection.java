@@ -8,27 +8,28 @@ public class Connection {
 	private Stop endingStop;
 	private int timeOfTravel;
 	private int id;
-	
+
 	public Connection() {
 		lines = new ArrayList<TransportLine>();
 	}
-	
-	public Connection(ArrayList<TransportLine> lines, Stop start, Stop end, int dist, int id) {
+
+	public Connection(ArrayList<TransportLine> lines, Stop start, Stop end,
+			int dist, int id) {
 		this.lines = new ArrayList<TransportLine>(lines);
 		this.startingStop = start;
 		this.endingStop = end;
 	}
-	
+
 	public Connection(Stop start, Stop end) {
 		lines = new ArrayList<TransportLine>();
 		this.startingStop = start;
 		this.endingStop = end;
 	}
-	
-	public void addLine(TransportLine line){
+
+	public void addLine(TransportLine line) {
 		lines.add(line);
 	}
-	
+
 	public Stop getEndingStop() {
 		return endingStop;
 	}
@@ -52,9 +53,10 @@ public class Connection {
 	public void setLinesArray(ArrayList<TransportLine> lines) {
 		this.lines = lines;
 	}
-	
-	public String toString(){
-		return "Start: " + startingStop.toString() + "\nStop: " + endingStop.toString();
+
+	public String toString() {
+		return "Start: " + startingStop.toString() + "\nStop: "
+				+ endingStop.toString() + "\ntime: " + timeOfTravel;
 	}
 
 	public int getTimeOfTravel() {

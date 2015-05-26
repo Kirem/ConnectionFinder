@@ -7,15 +7,17 @@ public class Edge {
 	private Vertex vertex1, vertex2;
     protected double distance;//time to travel between two stops
     private double edgeMultiplier;
+    private boolean isSameStop;
     private int edgeId;
     protected Timetable timetable;//time, when the bus arrive
 
-    public Edge(Vertex v1, Vertex v2, int edgeId, double dis, Timetable tt) {
+    public Edge(Vertex v1, Vertex v2, int edgeId, double dis, Timetable tt, boolean sameStop) {
         this.vertex1 = v1;
         this.vertex2 = v2;
         this.distance = dis;
         this.edgeMultiplier = 1;
         this.timetable=tt;
+        this.isSameStop = sameStop;
     }
 
     public double getDistance() {
@@ -51,6 +53,10 @@ public class Edge {
 
 	public double getDistance(int currTime, Week day) {
 		System.out.println("normal edge");
+//		if(!isSameStop){
+//			System.out.println("normal edge not same:" + distance);
+//			return distance;
+//		}
 		return timetable.getFirstTimeAfter(currTime, day) - currTime + distance;
 	}
 }
