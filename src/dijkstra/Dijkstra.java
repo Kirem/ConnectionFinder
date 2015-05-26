@@ -34,13 +34,37 @@ public class Dijkstra {
 		dijkstraResult = new DijkstraResult();
 	}
 
-	public DijkstraResult findShortestPath(int start, int end, boolean reversed, boolean notChangeLine) {
+	public DijkstraResult findShortestPath(int start, int end,
+			boolean reversed, boolean notChangeLine) {
+		List<Vertex> startingVertexes = graph.getVertexesForStopId(start);
+		System.out.println("Vertexes for stop: " + startingVertexes.size());
+		List<Vertex> stopVertexes = graph.getVertexesForStopId(end);
+		System.out.println("Vertexes for stop: " + stopVertexes.size());
+		DijkstraResult result = new DijkstraResult();
+		for (Vertex startVertex : startingVertexes) {
+			for (Vertex stopVertex : stopVertexes) {
+				time = Integer.MAX_VALUE;
+				DijkstraResult resultTemp = null;
+				resultTemp = findPath(startVertex.getId(), stopVertex.getId(),
+						reversed, notChangeLine);
+
+				if (result.time > resultTemp.time) {
+					result.time = resultTemp.time;
+					result.path = new ArrayList<Integer>(resultTemp.path);
+					result.interchangeNumber = resultTemp.interchangeNumber;
+				}
+			}
+		}
+		return result;
+	}
+
+	private DijkstraResult findPath(int start, int end, boolean reversed,
+			boolean notChangeLine) {
 		clearIfExist();
 		setLists();
 		setTarget(start, end);
 		while (!pending.isEmpty()) {
-			System.out.println("Just added: " + justAdded);
-			if(justAdded == -1){
+			if (justAdded == -1) {
 				break;
 			}
 			for (int neighbour : graph.getNeighboursForVertex(justAdded)) {
@@ -50,17 +74,19 @@ public class Dijkstra {
 						currTime = (int) (startingTime - path.get(justAdded));
 					} else {
 						currTime = (int) (startingTime + path.get(justAdded));
+						// System.out.println("check: " + currTime);
 					}
 					double newPath = path.get(justAdded)
 							+ graph.getEdgeDistance(justAdded, neighbour,
 									currTime, weekDay);
-					int currLineNum = graph.getLineNumber(justAdded, neighbour, currTime, weekDay);
-					System.out.println("currtime: " + currTime + " new Path: "
-							+ newPath + " currLine: " + currLineNum);
-					
+					int currLineNum = graph.getLineNumber(justAdded, neighbour,
+							currTime, weekDay);
+
 					if (notChangeLine) {
 						if (lastLineNum == currLineNum) {
 							setShorterPath(neighbour, newPath);
+							System.out.println("check: " + lastLineNum);
+
 							if (neighbour == goal) {
 								time = currTime;
 							}
@@ -74,16 +100,18 @@ public class Dijkstra {
 							lastLineNum = currLineNum;
 						}
 						if (neighbour == goal) {
-							time = currTime;
+							if (time > currTime)
+								time = currTime;
 						}
 					}
 				}
 			}
 			addNextVertex();
+
 		}
 		createSolution();
 		dijkstraResult.path = result;
-		dijkstraResult.time = time;
+		dijkstraResult.time = (int) (path.get(goal) + 0.0);
 		dijkstraResult.interchangeNumber = lineCounter;
 		return dijkstraResult;
 	}
@@ -126,7 +154,6 @@ public class Dijkstra {
 	private void addNextVertex() {
 		int smallest = findSmallestValue();
 		pending.remove(smallest);
-		System.out.println("found smallest:" + smallest);
 		justAdded = smallest;
 	}
 
@@ -134,8 +161,8 @@ public class Dijkstra {
 		double smallestValue = Double.MAX_VALUE;
 		int index = -1;
 		for (int next : pending.keySet()) {
-			System.out.println("found smallest:" + path.get(next) + " for: " + next
-					+ " smallest: " + smallestValue);
+			// System.out.println("found smallest:" + path.get(next) + " for: "
+			// + next + " smallest: " + smallestValue);
 			if (path.get(next) < smallestValue) {
 				smallestValue = path.get(next);
 				index = next;

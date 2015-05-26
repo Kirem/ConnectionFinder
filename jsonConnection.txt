@@ -3,7 +3,7 @@
 		"lines":[
 			{"type":"Bus","number":113}
 			],
-		"timeOfTravel":5,
+		"timeOfTravel":15,
 		"startingStop":{"stopID":1,"stopName":"sample"},
 		"endingStop":{"stopID":2,"stopName":"sample1"}
 	},	
@@ -11,7 +11,7 @@
 		"lines":[
 			{"type":"Bus","number":112}
 			],
-		"timeOfTravel":50,
+		"timeOfTravel":5,
 		"startingStop":{"stopID":1,"stopName":"sample"},
 		"endingStop":{"stopID":2,"stopName":"sample1"}
 	},	

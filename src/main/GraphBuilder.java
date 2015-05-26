@@ -18,9 +18,11 @@ public class GraphBuilder {
 		for (Connection connection : connections) {
 			for (TransportLine line : connection.getLinesArray()) {
 				Vertex vert = new Vertex(connection.getStartingStop()
-						.getStopID() * line.getNumber());
+						.getStopID() * line.getNumber(), connection
+						.getStartingStop().getStopID());
 				Vertex vert2 = new Vertex(connection.getEndingStop()
-						.getStopID() * line.getNumber());
+						.getStopID() * line.getNumber(), connection
+						.getEndingStop().getStopID());
 				// System.out.println(connection);
 				Timetable table = new Timetable(connection.getStartingStop()
 						.getStopID(), line.getNumber());
@@ -39,7 +41,8 @@ public class GraphBuilder {
 						pos = times.indexOf(table);
 						table = times.get(pos);
 						vert2 = new Vertex(connection.getStartingStop()
-								.getStopID() * line1.getNumber());
+								.getStopID() * line1.getNumber(), connection
+								.getStartingStop().getStopID());
 						graph.addVertex(vert2);
 						System.out.println(line);
 						System.out.println(line1);
@@ -61,9 +64,11 @@ public class GraphBuilder {
 		for (Connection connection : connections) {
 			for (TransportLine line : connection.getLinesArray()) {
 				Vertex vert2 = new Vertex(connection.getStartingStop()
-						.getStopID() * line.getNumber());
+						.getStopID() * line.getNumber(), connection
+						.getStartingStop().getStopID());
 				Vertex vert = new Vertex(connection.getEndingStop().getStopID()
-						* line.getNumber());
+						* line.getNumber(), connection.getStartingStop()
+						.getStopID());
 				// System.out.println(connection);
 				Timetable table = new Timetable(connection.getStartingStop()
 						.getStopID(), line.getNumber());
@@ -82,7 +87,8 @@ public class GraphBuilder {
 						pos = times.indexOf(table);
 						table = times.get(pos);
 						vert = new Vertex(connection.getStartingStop()
-								.getStopID() * line1.getNumber());
+								.getStopID() * line1.getNumber(), connection
+								.getStartingStop().getStopID());
 						graph.addVertex(vert);
 						System.out.println(line);
 						System.out.println(line1);

@@ -9,6 +9,7 @@ public class DijkstraResult {
 	public int time, interchangeNumber;
 	public DijkstraResult() {
 		this.path = new ArrayList<Integer>();
+		time = Integer.MAX_VALUE;
 	}
 	
 	@Override
